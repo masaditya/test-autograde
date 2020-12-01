@@ -7,7 +7,7 @@ jobs:
     steps:
       - name: Hello action
         id: hello
-        uses: masaditya/test-autograde@v1
+        uses: masaditya/test-autograde@v2
         with:
           who-to-greet: "Ndasdos"
       - name: Get output time
