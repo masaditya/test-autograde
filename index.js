@@ -1,14 +1,14 @@
-import { getInput, setOutput, setFailed } from '@actions/core'
-import { context } from '@actions/github'
+const core = require('@actions/core')
+const github = require('@actions/github')
 
 try {
-    const nameToGreet = getInput('who-to-greet')
+    const nameToGreet = core.getInput('who-to-greet')
     console.log(`Yo ngene! ${nameToGreet}`)
     const time = (new Date()).toTimeString()
-    setOutput("time", time)
+    core.setOutput("time", time)
 
-    const payload = JSON.stringify(context.payload, undefined, 2)
+    const payload = JSON.stringify(github.context.payload, undefined, 2)
     console.log(`Event payload e ${payload}`)
 } catch (error) {
-    setFailed(error.message)
+    core.setFailed(error.message)
 }
