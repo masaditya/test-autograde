@@ -1,4 +1,4 @@
-name: "Hello There!"
+name: test-autograde
 description: "Greeting!"
 inputs:
   who-to-greet: # id input
