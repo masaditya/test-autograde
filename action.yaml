@@ -1,5 +1,9 @@
 name: test-autograde
 description: "Greeting!"
+author : Aditya Eka
+branding : 
+  icon : 'check-circle'
+  color : 'white'
 inputs:
   who-to-greet: # id input
     description: "who to greet"
