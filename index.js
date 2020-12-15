@@ -4,13 +4,14 @@ const series = require('async')
 const {exec} = require('child_process');
 try {
     const nameToGreet = core.getInput('who-to-greet')
-    console.log(`Yo ngene! ${nameToGreet}`)
+    console.log(nameToGreet)
     const time = (new Date()).toTimeString()
     core.setOutput("time", time)
-    series.series([
+    const tmp = series.series([
         () => exec('npm test 2>&1 | tee test.log'),
         () => exec('cat test.log') 
     ]); 
+    console.log(tmp)
     const payload = JSON.stringify(github.context.payload, undefined, 2)
     console.log(`Event payload e ${payload}`)
 } catch (error) {
