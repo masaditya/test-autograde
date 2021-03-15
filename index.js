@@ -1,6 +1,7 @@
 const core = require('@actions/core')
 const github = require('@actions/github')
-const series = require('async')
+const series = require('async');
+const { default: axios } = require('axios');
 const {exec} = require('child_process');
 
 const runExec = async ()=> {
@@ -8,6 +9,7 @@ const runExec = async ()=> {
         () => exec('npm test 2>&1 | tee test.log'),
         () => exec('cat test.log') 
     ])
+    
 }
 try {
     const nameToGreet = core.getInput('who-to-greet')
@@ -15,7 +17,9 @@ try {
     const time = (new Date()).toTimeString()
     core.setOutput("time", time)
     runExec().then(res => {
-        console.log(res)
+        let x = await axios.get('https://5fb13d76590189001644662d.mockapi.io/api/tugas')
+        console.log(x)
+        console.log("res",res)
     }).catch(err => {
         console.log(err)
     })
