@@ -25,17 +25,9 @@ try {
       else
         console.log("data empty")
     })
-    
-    // let file = await axios.get("test.log")
-    // console.log(file)
-    // var client = new XMLHttpRequest();
-    // client.open('GET', '/test.log');
-    // // client.getAllResponseHeaders = function() {
-    //   console.log(client.responseText);
-    // }
     // Get the JSON webhook payload for the event that triggered the workflow
     const payload = JSON.stringify(github.context.payload, undefined, 2)
-    // console.log(`The event payload: ${payload}`);
+    console.log(`The event payload: ${payload}`);
   } catch (error) {
     core.setFailed(error.message);
   }
