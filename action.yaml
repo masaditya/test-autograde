@@ -5,10 +5,10 @@ branding :
   icon : 'check-circle'
   color : 'white'
 inputs:
-  who-to-greet: # id input
-    description: "who to greet"
+  kelas: # id input
+    description: "kelas yang diberikan tugas"
     required: true
-    default: "World"
+    default: ""
 outputs:
   time: # id of output
     description: "Time greeting"
