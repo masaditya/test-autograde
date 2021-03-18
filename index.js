@@ -6,25 +6,28 @@ const {exec} = require('child_process');
 const fetch = require('node-fetch');
 const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const fs = require('fs');
+
 async function main(){
 try {
     // `who-to-greet` input defined in action metadata file
     const nameToGreet = core.getInput('who-to-greet');
-    console.log(`Hello ${nameToGreet}!`);
-    let data = await axios.get('https://5fb13d76590189001644662d.mockapi.io/api/tugas')
-    console.log(data.data)
+    const kelas = core.getInput('class');
+
+    console.log(`Kelas ${kelas}!`);
+    
     const time = (new Date()).toTimeString();
     core.setOutput("time", time);
-    // const baseURL = 'http://localhost/'
-    // let log = await fetch(new URL("test.log", document.baseURI))
-    // console.log(log)
     
     fs.readFile('test.log','utf-8', (err, data)=> {
-      if(data)
-        console.log(data)
+      if(data){
+        // console.log(data)
+        parseData(data)
+      }
       else
         console.log("data empty")
     })
+
+    sendData()
     // Get the JSON webhook payload for the event that triggered the workflow
     const payload = JSON.stringify(github.context.payload, undefined, 2)
     console.log(`The event payload: ${payload}`);
@@ -34,27 +37,24 @@ try {
 }
 
 main()
-// const runExec = async ()=> {
-//     return series.series([
-//         () => exec('npm test 2>&1 | tee test.log'),
-//         () => exec('cat test.log') 
-//     ])
-    
-// }
-// try {
-//     const nameToGreet = core.getInput('who-to-greet')
-//     // console.log(nameToGreet)
-//     const time = (new Date()).toTimeString()
-//     core.setOutput("time", time)
-//     runExec().then(res => {
-//         let x = await axios.get('https://5fb13d76590189001644662d.mockapi.io/api/tugas')
-//         console.log(x)
-//         console.log("res",res)
-//     }).catch(err => {
-//         console.log(err)
-//     })
-//     const payload = JSON.stringify(github.context.payload, undefined, 2)
-//     // console.log(`Event payload e ${payload}`)
-// } catch (error) {
-//     core.setFailed(error.message)
-// }
+
+function parseData (data=""){
+  let arrString = data.split(/\s+/)
+  let indexFile = []
+  let countPass = arrString.filter((item, i) => {
+    if(item == "PASS"){
+      indexFile.push(i)
+      return item
+    }
+  })
+  console.log(countPass)
+  indexFile.forEach(i => {
+    console.log(arrString[i+1])
+  })
+}
+
+async function sendData ( ){
+  let data = await axios.get('https://5fb13d76590189001644662d.mockapi.io/api/tugas')
+  console.log(data.data)
+}
+
