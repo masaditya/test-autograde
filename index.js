@@ -1,17 +1,11 @@
 const core = require('@actions/core')
 const github = require('@actions/github')
-const series = require('async');
 const { default: axios } = require('axios');
-const {exec} = require('child_process');
-const fetch = require('node-fetch');
-const XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 const fs = require('fs');
 
 async function main(){
 try {
-    // `who-to-greet` input defined in action metadata file
-    const nameToGreet = core.getInput('who-to-greet');
-    const kelas = core.getInput('class');
+    const kelas = core.getInput('kelas');
 
     console.log(`Kelas ${kelas}!`);
     
