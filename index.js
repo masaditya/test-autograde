@@ -11,12 +11,11 @@ try {
     console.log(`Week ${week}!`);
     const time = (new Date()).toTimeString();
     core.setOutput("time", time);
-    const {payload } = github.context
-    console.log(payload)
+    // const {payload } = github.context
+    // console.log(payload)
     fs.readFile('test.log','utf-8', (err, data)=> {
       if(data){
-        let result = parseData(data)
-        console.log(result)
+        parseData(data)
       }
       else
         console.log("data empty")
@@ -34,8 +33,8 @@ function parseData (data=""){
   let arrString = data.split(/\s+/)
   let indexTestName = []
   let indexTestNameClose = []
-  let indexFileName = []
-  let testResult = []
+  // let indexFileName = []
+  // let testResult = []
 
   arrString.forEach((item, i) => {
     if(item == "√" || item == "×"){
@@ -48,11 +47,8 @@ function parseData (data=""){
     
   for (let i = 0; i < indexTestName.length; i++) {
     let testName = arrString.slice(indexTestName[i], indexTestNameClose[i]).join(" ")
-    testResult.push(testName)
     console.log(testName)
   }
-
-  return testResult
 }
 
 async function sendData ( ){
