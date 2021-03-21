@@ -10,5 +10,6 @@ jobs:
         uses: masaditya/test-autograde@v3
         with:
           kelas: "TI-4A"
+          week : 3
       - name: Get output time
         run: echo "The time was ${{ steps.hello.outputs.time }}"
