@@ -39,7 +39,7 @@ function parseData (data=""){
 
 
   let countTestName = arrString.filter((item, i) => {
-    if(item == "√" || item == "×"){
+    if(item == "✓" || item == "✕"){
       indexTestName.push(i)
       return item
     }
