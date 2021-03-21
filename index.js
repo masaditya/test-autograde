@@ -11,7 +11,7 @@ try {
     console.log(`Minggu ke-${week}!`);
     const time = (new Date()).toTimeString();
     core.setOutput("time", time);
-    const {payload } = github.context
+    const {payload} = github.context
     console.log(payload)
     fs.readFile('test.log','utf-8', (err, data)=> {
       if(data){
@@ -33,14 +33,12 @@ try {
             detail : parseData(data)
           }
         }
-
         console.log(gradeData)
-
       }
       else
         console.log("data empty")
     })
-    sendData()
+    // sendData()
     
   } catch (error) {
     core.setFailed(error.message);
