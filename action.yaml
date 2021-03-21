@@ -9,8 +9,8 @@ inputs:
     description: "kelas yang diberikan tugas"
     required: true
     default: ""
-  week : 
-    description: "minggu tugas"
+  minggu-ke : 
+    description: "tugas minggu ke"
     required: true
     default: ""
 outputs:
