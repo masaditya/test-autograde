@@ -51,6 +51,7 @@ function parseData (data=""){
   for (let i = 0; i < indexTestName.length; i++) {
     let testName = arrString.slice(indexTestName[i], indexTestNameClose[i]).join(" ")
     testResult.push(testName)
+    console.log(testName)
   }
 
   return testResult
