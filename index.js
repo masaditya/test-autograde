@@ -11,11 +11,10 @@ try {
     console.log(`Week ${week}!`);
     const time = (new Date()).toTimeString();
     core.setOutput("time", time);
-    // const {payload } = github.context
-    // console.log(payload)
+    const {payload } = github.context.payload
     fs.readFile('test.log','utf-8', (err, data)=> {
       if(data){
-        parseData(data)
+        console.log( parseData(data))
       }
       else
         console.log("data empty")
@@ -29,33 +28,39 @@ try {
   }
 }
 
+main()
+
 function parseData (data=""){
   let arrString = data.split(/\s+/)
   let indexTestName = []
   let indexTestNameClose = []
-  // let indexFileName = []
-  // let testResult = []
+  let indexFileName = []
+  let testResult = []
 
-  arrString.forEach((item, i) => {
+
+  let countTestName = arrString.filter((item, i) => {
     if(item == "√" || item == "×"){
       indexTestName.push(i)
-    }
-    if(item == "ms)"){
-      indexTestNameClose.push(i+1)
+      return item
     }
   })
-    
+  let countTestNameClose = arrString.filter((item, i) => {
+    if(item == "ms)"){
+      indexTestNameClose.push(i+1)
+      return item
+    }
+  })
+
   for (let i = 0; i < indexTestName.length; i++) {
     let testName = arrString.slice(indexTestName[i], indexTestNameClose[i]).join(" ")
-    console.log(testName)
+    testResult.push(testName)
   }
+
+  return testResult
 }
 
 async function sendData ( ){
   let data = await axios.get('https://5fb13d76590189001644662d.mockapi.io/api/tugas')
   console.log(data.data)
 }
-
-
-main()
 
