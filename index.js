@@ -15,7 +15,8 @@ try {
     console.log(payload)
     fs.readFile('test.log','utf-8', (err, data)=> {
       if(data){
-        console.log( parseData(data))
+        let result = await parseData(data)
+        console.log(result)
       }
       else
         console.log("data empty")
@@ -31,7 +32,7 @@ try {
 
 main()
 
-function parseData (data=""){
+async function parseData (data=""){
   let arrString = data.split(/\s+/)
   let indexTestName = []
   let indexTestNameClose = []
