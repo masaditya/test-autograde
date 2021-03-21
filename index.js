@@ -15,7 +15,7 @@ try {
     console.log(payload)
     fs.readFile('test.log','utf-8', (err, data)=> {
       if(data){
-        let result = await parseData(data)
+        let result = parseData(data)
         console.log(result)
       }
       else
@@ -30,15 +30,12 @@ try {
   }
 }
 
-main()
-
-async function parseData (data=""){
+function parseData (data=""){
   let arrString = data.split(/\s+/)
   let indexTestName = []
   let indexTestNameClose = []
   let indexFileName = []
   let testResult = []
-
 
   arrString.forEach((item, i) => {
     if(item == "√" || item == "×"){
@@ -62,4 +59,7 @@ async function sendData ( ){
   let data = await axios.get('https://5fb13d76590189001644662d.mockapi.io/api/tugas')
   console.log(data.data)
 }
+
+
+main()
 
