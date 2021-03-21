@@ -11,7 +11,7 @@ try {
     console.log(`Minggu ke-${week}!`);
     const time = (new Date()).toTimeString();
     core.setOutput("time", time);
-    const {payload } = github.context.payload
+    const {payload } = github.context
     console.log(payload)
     fs.readFile('test.log','utf-8', (err, data)=> {
       if(data){
