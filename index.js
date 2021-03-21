@@ -15,22 +15,25 @@ try {
     console.log(payload)
     fs.readFile('test.log','utf-8', (err, data)=> {
       if(data){
+        const processedData = parseData(data)
         const gradeData = {
           user : {
             name : payload.head_commit.author.name,
             email : payload.head_commit.author.email,
-            username : payload.head_commit.author.masaditya
+            username : payload.head_commit.author.username,
+            avatar : payload.sender.avatar_url
           },
           assignment : {
             repo_url : payload.repository.html_url,
             repo_name : payload.repository.full_name.split("/")[1],
             week : week,
-            class : kelas
+            class : kelas,
+            last_push : new Date(payload.repository.pushed_at * 1000).toLocaleString()
           },
           grade : {
-            correct : 0,
-            incorrect : 0,
-            detail : parseData(data)
+            correct : processedData.correctTest,
+            incorrect : processedData.incorrectTest,
+            detail : processedData.testResult
           }
         }
         console.log(gradeData)
@@ -52,23 +55,30 @@ function parseData (data=""){
   let indexTestName = []
   let indexTestNameClose = []
   let testResult = []
+  let correctTest = []
+  let incorrectTest = []
 
  arrString.forEach((item, i) => {
-    if(item == "✓" || item == "✕"){
+    if(item == "✓" ){
       indexTestName.push(i)
+      correctTest.push(i)
+    }
+    if(item == "✕"){
+      indexTestName.push(i)
+      incorrectTest.push(i)
     }
     if(item == "ms)"){
       indexTestNameClose.push(i+1)
       return item
     }
   })
-
+  console.log(new Date(1615873607 * 1000).toLocaleString())
   for (let i = 0; i < indexTestName.length; i++) {
     let testName = arrString.slice(indexTestName[i], indexTestNameClose[i]).join(" ")
     testResult.push(testName)
   }
 
-  return testResult
+  return {testResult, correctTest, incorrectTest}
 }
 
 async function sendData ( ){
