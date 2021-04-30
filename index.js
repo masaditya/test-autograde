@@ -28,7 +28,7 @@ try {
             repo_name : payload.repository.full_name.split("/")[1],
             week : week,
             class : kelas,
-            last_push : new Date(payload.repository.pushed_at * 1000).toLocaleString('id')
+            last_push : new Date(payload.repository.pushed_at * 1000).toLocaleString(['gmt', 'id'])
           },
           grade : {
             correct : processedData.correctTest.length,
