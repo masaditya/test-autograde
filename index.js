@@ -28,11 +28,11 @@ try {
             repo_name : payload.repository.full_name.split("/")[1],
             week : week,
             class : kelas,
-            last_push : new Date(payload.repository.pushed_at * 1000).toLocaleString()
+            last_push : new Date(payload.repository.pushed_at * 1000).toLocaleString('id', { timeZone: 'UTC' })
           },
           grade : {
-            correct : processedData.correctTest,
-            incorrect : processedData.incorrectTest,
+            correct : processedData.correctTest.length,
+            incorrect : processedData.incorrectTest.length,
             detail : processedData.testResult
           }
         }
@@ -72,7 +72,6 @@ function parseData (data=""){
       return item
     }
   })
-  console.log(new Date(1615873607 * 1000).toLocaleString())
   for (let i = 0; i < indexTestName.length; i++) {
     let testName = arrString.slice(indexTestName[i], indexTestNameClose[i]).join(" ")
     testResult.push(testName)
