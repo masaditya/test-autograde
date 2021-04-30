@@ -28,7 +28,7 @@ try {
             repo_name : payload.repository.full_name.split("/")[1],
             week : week,
             class : kelas,
-            last_push : new Date(payload.repository.pushed_at * 1000).toLocaleString('id', { timeZone: 'UTC' })
+            last_push : new Date(payload.repository.pushed_at * 1000).toLocaleString('id')
           },
           grade : {
             correct : processedData.correctTest.length,
@@ -41,7 +41,7 @@ try {
       else
         console.log("data empty")
     })
-    // sendData()
+    sendData(gradeData)
     
   } catch (error) {
     core.setFailed(error.message);
@@ -80,7 +80,7 @@ function parseData (data=""){
   return {testResult, correctTest, incorrectTest}
 }
 
-async function sendData ( ){
+async function sendData (gradeData){
   let data = await axios.get('https://5fb13d76590189001644662d.mockapi.io/api/tugas')
   console.log(data.data)
 }
