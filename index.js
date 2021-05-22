@@ -21,7 +21,8 @@ try {
             name : payload.head_commit.author.name,
             email : payload.head_commit.author.email,
             username : payload.head_commit.author.username,
-            avatar : payload.sender.avatar_url
+            avatar : payload.sender.avatar_url,
+            id : payload.sender.id
           },
           assignment : {
             repo_url : payload.repository.html_url,
@@ -37,11 +38,13 @@ try {
           }
         }
         console.log(gradeData)
+        let data = await axios.get('https://5fb13d76590189001644662d.mockapi.io/api/tugas')
+        console.log(data.data)
       }
       else
         console.log("data empty")
     })
-    sendData(gradeData)
+    
     
   } catch (error) {
     core.setFailed(error.message);
@@ -81,7 +84,6 @@ function parseData (data=""){
 }
 
 async function sendData (gradeData){
-  let data = await axios.get('https://5fb13d76590189001644662d.mockapi.io/api/tugas')
-  console.log(data.data)
+  
 }
 
