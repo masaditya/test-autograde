@@ -34,11 +34,12 @@ async function main() {
           },
         };
         console.log(gradeData);
-        let response = await axios.post(
-          "https://nostalgic-ramanujan-96cef2.netlify.app/.netlify/functions/postdata",
-          gradeData
-        );
-        console.log(response);
+        sendData(gradeData);
+        // let response = await axios.post(
+        //   "https://nostalgic-ramanujan-96cef2.netlify.app/.netlify/functions/postdata",
+        //   gradeData
+        // );
+        // console.log(response);
       } else console.log("data empty");
     });
   } catch (error) {
@@ -80,4 +81,10 @@ function parseData(data = "") {
   return { testResult, correctTest, incorrectTest };
 }
 
-async function sendData(gradeData) {}
+async function sendData(gradeData) {
+  let response = await axios.post(
+    "https://nostalgic-ramanujan-96cef2.netlify.app/.netlify/functions/postdata",
+    gradeData
+  );
+  console.log(response);
+}
