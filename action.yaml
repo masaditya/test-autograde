@@ -7,11 +7,11 @@ branding :
 inputs:
   kelas: # id input
     description: "kelas yang diberikan tugas"
-    required: true
+    required: false
     default: ""
   minggu-ke : 
     description: "tugas minggu ke"
-    required: true
+    required: false
     default: ""
 outputs:
   time: # id of output

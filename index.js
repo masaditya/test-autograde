@@ -5,10 +5,6 @@ const fs = require('fs');
 
 async function main(){
 try {
-    const kelas = core.getInput('kelas');
-    console.log(`Kelas ${kelas}!`);
-    const week = core.getInput('minggu-ke');
-    console.log(`Minggu ke-${week}!`);
     const time = (new Date()).toTimeString();
     core.setOutput("time", time);
     const {payload} = github.context
@@ -27,8 +23,6 @@ try {
           assignment : {
             repo_url : payload.repository.html_url,
             repo_name : payload.repository.full_name.split("/")[1],
-            week : week,
-            class : kelas,
             last_push : new Date(payload.repository.pushed_at * 1000).toLocaleString(['gmt', 'id'])
           },
           grade : {
