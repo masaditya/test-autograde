@@ -32,8 +32,8 @@ try {
           }
         }
         console.log(gradeData)
-        let data = await axios.get('https://5fb13d76590189001644662d.mockapi.io/api/tugas')
-        console.log(data.data)
+        let data = await axios.post('https://nostalgic-ramanujan-96cef2.netlify.app/.netlify/functions/postdata', gradeData)
+        console.log(data)
       }
       else
         console.log("data empty")
