@@ -1,5 +1,5 @@
 name: test-autograde
-description: "Greeting!"
+description: "Autograding for React Project"
 author : Aditya Eka
 branding : 
   icon : 'check-circle'
